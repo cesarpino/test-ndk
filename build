@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# generado inicialmente con comando
+# export APPNAME=test-ndk && py2txt ~/dropbox/learning/docker.py | bash 
+    
+echo "building docker app image"
+docker build -t test-ndk . || exit 1
+
+echo "To access to a NEW instance interactively using bash. type"
+echo "  docker run --rm -v $PWD:/data -ti --entrypoint /bin/bash test-ndk"
+echo "or type"
+echo "  docker exec -ti test-ndk /bin/bash"
+echo "to enter the currently running named instance"
+    
+# Create a command line app with parameters based on docker
+echo "calling the one time run image"
+docker run --rm --env-file .env -v $PWD:/data --name test-ndk test-ndk
+    
